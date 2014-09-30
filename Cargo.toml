@@ -3,3 +3,12 @@
 name = "rust-magenta"
 version = "0.0.1"
 authors = ["Marsel Zaripov <marszaripov@gmail.com>"]
+
+[lib]
+
+name = "magenta"
+path = "src/magenta/lib.rs"
+
+[dependencies.num]
+
+git = "https://github.com/rust-lang/num.git"

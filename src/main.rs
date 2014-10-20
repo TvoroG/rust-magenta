@@ -18,7 +18,7 @@ use magenta::utils::print_array;
 
 fn print_usage(program: &str, opts: &[OptGroup]) {
     println!("Usage: {} pbc [-k|--key path] <input_file> <output_file>", program);
-    println!("Usage: {} pbc <-d|--dec> <-k|--key path> <input_file> <output_file>", program);
+    println!("       {} pbc <-d|--dec> <-k|--key path> <input_file> <output_file>", program);
     println!("       {} hash <input_file>", program);
     println!("       {} ds [-k|--key path] <input_file>", program);
     println!("       {} ds <-v|--verify sig> <-k|--key path> <input_file>", program);

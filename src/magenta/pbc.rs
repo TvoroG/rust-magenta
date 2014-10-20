@@ -111,7 +111,7 @@ impl PBC {
             file_out.write(&first_block);
             file_out.write(second_block.slice_to(block_remain));
         } else {
-            file_out.write(first_block.slice_to(block_remain));
+            file_out.write(first_block.slice_to(remain_size as uint));
         }
     }
 

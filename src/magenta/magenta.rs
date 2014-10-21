@@ -1,4 +1,4 @@
-
+use std::iter::FromIterator;
 use utils::{B8, B16, B24, B32, concat_u8, nth_byte, part, xor_array
             , concat_arrays_u8};
 
@@ -59,9 +59,9 @@ impl Magenta {
 
     pub fn key(self) -> Vec<u8> {
         match self {
-            Key128(k) => Vec::from_slice(k.as_slice()),
-            Key192(k) => Vec::from_slice(k.as_slice()),
-            Key256(k) => Vec::from_slice(k.as_slice()),
+            Key128(k) => Vec::from_fn(k.len(), |i| k[i]),
+            Key192(k) => Vec::from_fn(k.len(), |i| k[i]),
+            Key256(k) => Vec::from_fn(k.len(), |i| k[i]),
         }
     }
 

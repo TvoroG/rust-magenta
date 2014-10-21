@@ -98,7 +98,6 @@ pub fn file_size(file: &mut File) -> u64 {
 
 pub fn fill_with_file_size(file: &mut File, buf: &mut [u8]) {
     let fs: u64 = file_size(file);
-    println!("file size: {}", fs);
     for i in range(0u, 8) {
         buf[buf.len() - i - 1] = nth_byte_u64(fs, i);
     }

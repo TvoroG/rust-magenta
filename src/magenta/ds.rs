@@ -4,17 +4,23 @@ use num::bigint::{BigUint, ToBigUint, RandBigInt};
 use std::num::One;
 use hash::h_file;
 use utils::mod_pow;
-use std::num::ToStrRadix;
 use std::num::from_str_radix;
 
 
 pub struct DigSig {
-    r: BigUint,
-    s: BigUint
+    pub r: BigUint,
+    pub s: BigUint
 }
 
 
 impl DigSig {
+    pub fn new(r: BigUint, s: BigUint) -> DigSig {
+        DigSig {
+            r: r,
+            s: s
+        }
+    }
+
     pub fn from_file(ds_path: &str) -> DigSig {
         let mut file = File::open(&Path::new(ds_path)).unwrap();
         let s = file.read_to_string().unwrap();
@@ -53,8 +59,8 @@ impl DigSig {
 
     pub fn to_file(&self, file_path: &str) {
         let mut file = File::create(&Path::new(file_path)).unwrap();
-        let r_str = self.r.to_str_radix(10);
-        let s_str = self.s.to_str_radix(10);
+        let r_str = format!("{}", self.r);
+        let s_str = format!("{}", self.s);
         file.write_str(r_str.as_slice());
         file.write_char('\n');
         file.write_str(s_str.as_slice());
@@ -62,7 +68,7 @@ impl DigSig {
 
     pub fn key_to_file(file_path: &str, k: &BigUint) {
         let mut file = File::create(&Path::new(file_path)).unwrap();
-        let k_str = k.to_str_radix(10);
+        let k_str = format!("{}", k);
         file.write_str(k_str.as_slice());
     }
 
@@ -79,8 +85,8 @@ impl DigSig {
     }
 
     fn get_p_and_q() -> (BigUint, BigUint) {
-        let p: BigUint = from_str("13232376895198612407547930718267435757728527029623408872245156039757713029036368719146452186041204237350521785240337048752071462798273003935646236777459223").unwrap();
-        let q: BigUint = from_str("857393771208094202104259627990318636601332086981").unwrap();
+        let p: BigUint = from_str("100171957116027409589353405993935820347426201265179460517658228929832800232041").unwrap();
+        let q: BigUint = from_str("294378924251756658506775180343451703611").unwrap();
         (p, q)
     }
 
@@ -117,8 +123,7 @@ impl DigSig {
     }
 
     fn calc_g(p: &BigUint, q: &BigUint) -> BigUint {
-        let gamma: BigUint = from_str("7521483903782060346617399017671409232618347905458279916384743575270644052774952605706862089884256074095039537064180858502511421752637985122233359298954651").unwrap();
-        let one: BigUint = One::one();
-        mod_pow(gamma, (p - one) / q.clone(), p.clone())
+        let g: BigUint = from_str("31386163582287930555526549190665019552068439786161706594508575036593710785145").unwrap();
+        g
     }
 }
